@@ -94,6 +94,19 @@ function mostrarAutos (autos){
   })
 }
 
+//mostrar cuando no hay resultado
+function noResultado(){
+
+  limpiarHTML();
+
+  const noResultado = document.createElement('div');
+  noResultado.classList.add('error','alerta');
+  noResultado.textContent ='Resultado no encontrado '
+  resultado.appendChild(noResultado)
+
+}
+
+
 //limpiar html
 function limpiarHTML (){
   while(resultado.firstChild){
@@ -114,8 +127,13 @@ function llenarSelect(){
 function filtrarAutos (){
   const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor);
 
-  mostrarAutos(resultado)
-  console.log(resultado)
+
+  if(resultado.length){
+    mostrarAutos(resultado)
+    console.log(resultado)
+  }else{
+    noResultado();
+  }
 } 
 
 function filtrarMarca (auto){
